@@ -2,7 +2,7 @@ import { Link } from "expo-router";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const codeverseLogo = require("../../assets/codeverse-logo.png");
+const codeverseLogo = require("../../assets/navega-senai.png");
 
 export default function HomeScreen() {
   return (
@@ -55,11 +55,11 @@ const styles = StyleSheet.create({
     gap: 10,
     padding: 24,
     borderRadius: 24,
-    backgroundColor: "#0f62fe",
+    backgroundColor: "#A96B3B",
   },
   logo: {
-    width: 120,
-    height: 120,
+    width: 280,
+    height: 140,
     marginBottom: 4,
   },
   eyebrow: {
@@ -95,14 +95,14 @@ const styles = StyleSheet.create({
   },
   cardItem: {
     fontSize: 15,
-    color: "#334e68",
+    color: "#774c2b",
   },
   button: {
     paddingVertical: 16,
     paddingHorizontal: 20,
     borderRadius: 16,
     alignItems: "center",
-    backgroundColor: "#102542",
+    backgroundColor: "#3a2311",
   },
   buttonText: {
     fontSize: 16,
