@@ -1,0 +1,16 @@
+{
+  "expo": {
+    "name": "GPS-Mobile",
+    "slug": "gps-mobile",
+    "scheme": "gps-mobile",
+    "plugins": [
+      "expo-router"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "web": {
+      "bundler": "metro"
+    }
+  }
+}
