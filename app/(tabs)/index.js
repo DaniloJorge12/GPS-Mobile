@@ -1,112 +1,364 @@
-import { Link } from "expo-router";
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { router } from "expo-router";
+import {
+  Image,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const codeverseLogo = require("../../assets/navega-senai.png");
+const logo = require("../../assets/navega-senai.png");
 
 export default function HomeScreen() {
   return (
-    <SafeAreaView style={styles.safeArea}>
-      <View style={styles.container}>
-        <View style={styles.hero}>
+    <SafeAreaView style={styles.container}>
+      <ScrollView showsVerticalScrollIndicator={false}>
+
+        <View style={styles.header}>
+          <View>
+            <Text style={styles.greeting}>Olá, Novato!</Text>
+            <Text style={styles.subtitle}>
+              Que bom ter você por aqui.
+            </Text>
+          </View>
+
+          <Pressable
+            onPress={() => router.push("/(tabs)/configuracoes")}
+          >
+            <Ionicons
+              name="settings-outline"
+              size={28}
+              color="#5A3218"
+            />
+          </Pressable>
+        </View>
+
+        <View style={styles.logoArea}>
           <Image
-            source={codeverseLogo}
+            source={logo}
             style={styles.logo}
             resizeMode="contain"
           />
-          <Text style={styles.eyebrow}>React Native + Expo Router</Text>
-          <Text style={styles.title}>Seu app já nasce organizado</Text>
-          <Text style={styles.description}>
-            Estrutura pronta para o aluno focar em componentes, navegação e
-            lógica de negócio desde a primeira aula.
+
+          <Text style={styles.logoText}>
+            Seu guia na escola, sempre.
           </Text>
         </View>
 
-        <View style={styles.card}>
-          <Text style={styles.cardTitle}>O que vem configurado</Text>
-          <Text style={styles.cardItem}>• JavaScript habilitado</Text>
-          <Text style={styles.cardItem}>• Rotas com expo-router</Text>
-          <Text style={styles.cardItem}>• Abas e modal de exemplo</Text>
-          <Text style={styles.cardItem}>• Scripts para Android, iOS e Web</Text>
+        <Pressable
+          style={styles.locationCard}
+          onPress={() => router.push("/(tabs)/locais")}
+        >
+          <View style={styles.locationIcon}>
+            <Ionicons
+              name="location"
+              size={30}
+              color="#FFF9EE"
+            />
+          </View>
+
+          <View style={styles.locationText}>
+            <Text style={styles.locationTitle}>
+              Encontrar um local
+            </Text>
+
+            <Text style={styles.locationDescription}>
+              Descubra onde ficam os principais lugares da escola.
+            </Text>
+          </View>
+
+          <Ionicons
+            name="chevron-forward"
+            size={24}
+            color="#A96B3B"
+          />
+        </Pressable>
+
+        <Text style={styles.sectionTitle}>
+          Acesso rápido
+        </Text>
+
+        <View style={styles.buttons}>
+          <Pressable
+            style={styles.button}
+            onPress={() => router.push("/(tabs)/locais")}
+          >
+            <Ionicons
+              name="map-outline"
+              size={28}
+              color="#5A3218"
+            />
+
+            <Text style={styles.buttonText}>
+              Ver locais
+            </Text>
+          </Pressable>
+
+          <Pressable
+            style={styles.button}
+            onPress={() => router.push("/(tabs)/locais")}
+          >
+            <Ionicons
+              name="compass-outline"
+              size={28}
+              color="#5A3218"
+            />
+
+            <Text style={styles.buttonText}>
+              Explorar
+            </Text>
+          </Pressable>
+
+          <Pressable
+            style={styles.button}
+            onPress={() => router.push("/(tabs)/sobre")}
+          >
+            <Ionicons
+              name="information-circle-outline"
+              size={28}
+              color="#5A3218"
+            />
+
+            <Text style={styles.buttonText}>
+              Sobre
+            </Text>
+          </Pressable>
+
+          <Pressable
+            style={styles.button}
+            onPress={() => router.push("/(tabs)/configuracoes")}
+          >
+            <Ionicons
+              name="settings-outline"
+              size={28}
+              color="#5A3218"
+            />
+
+            <Text style={styles.buttonText}>
+              Configurações
+            </Text>
+          </Pressable>
         </View>
 
-        <Link href="/modal" asChild>
-          <Pressable style={styles.button}>
-            <Text style={styles.buttonText}>Abrir modal de exemplo</Text>
+        <View style={styles.tip}>
+          <Ionicons
+            name="bulb-outline"
+            size={28}
+            color="#5A3218"
+          />
+
+          <View style={styles.tipTextArea}>
+            <Text style={styles.tipTitle}>
+              Dica para novatos
+            </Text>
+
+            <Text style={styles.tipText}>
+              Use a aba Locais para descobrir os pontos importantes da escola.
+            </Text>
+          </View>
+        </View>
+
+        <View style={styles.bottomCard}>
+          <Text style={styles.bottomTitle}>
+            Conheça nossa escola
+          </Text>
+
+          <Text style={styles.bottomText}>
+            Encontre os lugares que fazem parte da sua rotina.
+          </Text>
+
+          <Pressable
+            style={styles.bottomButton}
+            onPress={() => router.push("/(tabs)/locais")}
+          >
+            <Text style={styles.bottomButtonText}>
+              Explorar locais
+            </Text>
+
+            <Ionicons
+              name="arrow-forward"
+              size={18}
+              color="#FFF9EE"
+            />
           </Pressable>
-        </Link>
-      </View>
+        </View>
+
+      </ScrollView>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-    backgroundColor: "#f8fbff",
-  },
   container: {
     flex: 1,
-    padding: 24,
-    gap: 20,
-  },
-  hero: {
-    alignItems: "center",
-    gap: 10,
-    padding: 24,
-    borderRadius: 24,
-    backgroundColor: "#A96B3B",
-  },
-  logo: {
-    width: 280,
-    height: 140,
-    marginBottom: 4,
-  },
-  eyebrow: {
-    fontSize: 13,
-    fontWeight: "700",
-    letterSpacing: 1,
-    textTransform: "uppercase",
-    color: "#d0e2ff",
-    textAlign: "center",
-  },
-  title: {
-    fontSize: 32,
-    fontWeight: "800",
-    color: "#ffffff",
-    textAlign: "center",
-  },
-  description: {
-    fontSize: 16,
-    lineHeight: 24,
-    color: "#edf5ff",
-    textAlign: "center",
-  },
-  card: {
-    gap: 8,
-    padding: 20,
-    borderRadius: 20,
     backgroundColor: "#ffffff",
   },
-  cardTitle: {
-    fontSize: 18,
-    fontWeight: "700",
-    color: "#102542",
-  },
-  cardItem: {
-    fontSize: 15,
-    color: "#774c2b",
-  },
-  button: {
-    paddingVertical: 16,
-    paddingHorizontal: 20,
-    borderRadius: 16,
+
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: "#3a2311",
+    padding: 20,
   },
+
+  greeting: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#5A3218",
+  },
+
+  subtitle: {
+    marginTop: 4,
+    fontSize: 14,
+    color: "#6F4A2D",
+  },
+
+  logoArea: {
+    alignItems: "center",
+    paddingHorizontal: 20,
+    marginTop: 5,
+  },
+
+  logo: {
+    width: 300,
+    height: 100,
+  },
+
+  logoText: {
+    fontSize: 14,
+    color: "#5A3218",
+    marginTop: -10,
+  },
+
+  locationCard: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#FFF9EE",
+    margin: 20,
+    padding: 16,
+    borderRadius: 18,
+  },
+
+  locationIcon: {
+    width: 55,
+    height: 55,
+    borderRadius: 15,
+    backgroundColor: "#A96B3B",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  locationText: {
+    flex: 1,
+    marginLeft: 12,
+    marginRight: 8,
+  },
+
+  locationTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#5A3218",
+  },
+
+  locationDescription: {
+    marginTop: 4,
+    fontSize: 13,
+    color: "#6F4A2D",
+  },
+
+  sectionTitle: {
+    fontSize: 19,
+    fontWeight: "bold",
+    color: "#5A3218",
+    marginHorizontal: 20,
+    marginBottom: 12,
+  },
+
+  buttons: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    paddingHorizontal: 20,
+  },
+
+  button: {
+    width: "48%",
+    backgroundColor: "#EAD8BE",
+    padding: 18,
+    borderRadius: 16,
+    marginBottom: 12,
+  },
+
   buttonText: {
+    marginTop: 10,
+    fontSize: 14,
+    fontWeight: "bold",
+    color: "#5A3218",
+  },
+
+  tip: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#F0DFC4",
+    marginHorizontal: 20,
+    marginTop: 8,
+    padding: 16,
+    borderRadius: 18,
+  },
+
+  tipTextArea: {
+    flex: 1,
+    marginLeft: 12,
+  },
+
+  tipTitle: {
     fontSize: 16,
-    fontWeight: "700",
-    color: "#ffffff",
+    fontWeight: "bold",
+    color: "#5A3218",
+  },
+
+  tipText: {
+    marginTop: 4,
+    fontSize: 13,
+    color: "#6F4A2D",
+  },
+
+  bottomCard: {
+    backgroundColor: "#D3A46E",
+    margin: 20,
+    padding: 20,
+    borderRadius: 18,
+  },
+
+  bottomTitle: {
+    fontSize: 22,
+    fontWeight: "bold",
+    color: "#5A3218",
+  },
+
+  bottomText: {
+    marginTop: 8,
+    fontSize: 14,
+    color: "#FFF9EE",
+  },
+
+  bottomButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    alignSelf: "flex-start",
+    backgroundColor: "#5A3218",
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+    borderRadius: 15,
+    marginTop: 15,
+  },
+
+  bottomButtonText: {
+    color: "#FFF9EE",
+    fontWeight: "bold",
+    marginRight: 8,
   },
 });
