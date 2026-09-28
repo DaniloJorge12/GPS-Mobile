@@ -5,6 +5,7 @@ export default function TabsLayout() {
   return (
     <Tabs
       screenOptions={{
+        headerShown: false,
         headerShadowVisible: false,
         tabBarActiveTintColor: "#A96B3B",
         tabBarLabelStyle: {
@@ -16,8 +17,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "Início",
-          headerTitle: "Projeto Base",
+          headerTitle: false,
           tabBarIcon: ({ color, size }) => (
             <Ionicons
               name="home-outline"
