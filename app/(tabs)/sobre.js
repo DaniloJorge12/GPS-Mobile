@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const lessons = [
@@ -11,22 +11,33 @@ const lessons = [
 export default function LessonsScreen() {
   return (
     <SafeAreaView style={styles.safeArea}>
-      <View style={styles.container}>
-        <Text style={styles.title}>Sugestão de trilha</Text>
-        <Text style={styles.description}>
-          Esta aba já pode servir como ponto de partida para exercícios e
-          atividades práticas.
-        </Text>
+      <ScrollView style={styles.scrollContent}>
+        <View style={styles.container}>
+          <Text style={styles.title}>Sugestão de trilha</Text>
+          <Text style={styles.description}>
+            Esta aba já pode servir como ponto de partida para exercícios e
+            atividades práticas.
+          </Text>
 
-        <View style={styles.list}>
-          {lessons.map((lesson, index) => (
-            <View key={lesson} style={styles.listItem}>
-              <Text style={styles.badge}>{index + 1}</Text>
-              <Text style={styles.listText}>{lesson}</Text>
-            </View>
-          ))}
+          <View style={styles.list}>
+            {lessons.map((lesson, index) => (
+              <View key={lesson} style={styles.listItem}>
+                <Text style={styles.badge}>{index + 1}</Text>
+                <Text style={styles.listText}>{lesson}</Text>
+              </View>
+            ))}
+          </View>
+          <View style={styles.equipeContainer}>
+            <Text style={styles.equipeTitulo}>Equipe:</Text>
+            <Text style={styles.itemText}>• Emilio Favoretto</Text>
+            <Text style={styles.itemText}>• Pedro Otavio</Text>
+            <Text style={styles.itemText}>• Maria Eduarda</Text>
+            <Text style={styles.itemText}>• Manuela Maestro</Text>
+            <Text style={styles.itemText}>• Danilo Jorge</Text>
+            <Text style={styles.itemText}>• Pedro Urbano</Text>
+          </View>
         </View>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -77,5 +88,11 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 15,
     color: "#3d2c00",
+  },
+  equipeContainer: {
+    marginTop: 24,
+    backgroundColor: "#ffffff",
+    padding: 16,
+    borderRadius: 18,
   },
 });
