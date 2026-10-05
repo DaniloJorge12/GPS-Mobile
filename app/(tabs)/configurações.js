@@ -1,108 +1,141 @@
-import { Link } from 'expo-router';
-import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import React from 'react';
+import { View, Text, Switch, Pressable, StyleSheet} from "react-native";
 
-const codeverseLogo = require('../../assets/codeverse-logo.png');
+export const CONFIG_PADRAO = {
+    raioChegada: 20,
+    somLigado: true,
+    modoTeste: false,
+    temaEscuro: false,
+    rota: 'rapida',
+};
 
-export default function HomeScreen() {
+const LIGHT_THEME = { background: '#ffffff', card: '#dcfce7', text: '#111827', textMuted:'#4b5563'};
+const DARK_THEME = { background: '#111827', card: '#1f2937', text: '#f9fafb', textMuted: '#9ca3af'};
+
+export default function TelaConfiguracoes({ config, onChange}) {
+    const colors = config.temaEscuro ? DARK_THEME : LIGHT_THEME;
+
+    function aumentarRaio() {
+        if (config.raioChegada < 100) {
+            onChange({ ...config, raioChegada: config.raioChegada + 5})
+        }
+    }
+
+
+    function diminuirRaio() {
+        if (config.raioChegada > 5) {
+            onChange({ ...config, raioChegada: config.raioChegada - 5})
+        }
+    }
+
     return (
-        <SafeAreaView style={styles.safeArea}>
-            <View style={styles.container}>
-                <View style={styles.hero}>
-                    <Image source={codeverseLogo} style={styles.logo} resizeMode="contain" />
-                    <Text style={styles.eyebrow}>React Native + Expo Router</Text>
-                    <Text style={styles.title}>Seu app já nasce organizado</Text>
-                    <Text style={styles.description}>
-                        Estrutura pronta para o aluno focar em componentes, navegação e lógica de
-                        negócio desde a primeira aula.
-                    </Text>
-                </View>
+        <View style={[styles.screen, { backgroundColor: colors.background}]}>
+            <Text style={[styles.title, {color: colors.text}]}>Configurações</Text>
 
-                <View style={styles.card}>
-                    <Text style={styles.cardTitle}>O que vem configurado</Text>
-                    <Text style={styles.cardItem}>• JavaScript habilitado</Text>
-                    <Text style={styles.cardItem}>• Rotas com expo-router</Text>
-                    <Text style={styles.cardItem}>• Abas e modal de exemplo</Text>
-                    <Text style={styles.cardItem}>• Scripts para Android, iOS e Web</Text>
-                </View>
-
-                <Link href="/modal" asChild>
-                    <Pressable style={styles.button}>
-                        <Text style={styles.buttonText}>Abrir modal de exemplo</Text>
-                    </Pressable>
-                </Link>
+        <View style={[styles.card, { backgroundColor: colors.card}]}>
+            <View style={styles.row}>
+                <Text style={[styles.label, { color: colors.text }]}>Modo Escuro</Text>
+                <Switch
+                    value={config.temaEscuro}
+                    onValueChange={(value) => onChange({...config, temaEscuro: value})} 
+                    />
             </View>
-        </SafeAreaView>
+            </View>
+
+        <View style={[styles.card, { backgroundColor: colors.card}]}>
+            <Text style={[styles.label, { color: colors.text}]}>Route Type</Text>
+            <View style={styles.routeRow}>
+                <Pressable
+                    style={[styles.option, config.rota === 'rapida' && styles.activeOption]}
+                    onPress={() => onChange({...config, rota: 'rapida'})}
+                    >
+                        <Text style={[styles.optionText, config.rota === 'rapida' && styles.activeOptionText]}>
+                            Rápida
+                        </Text>
+                    </Pressable>
+                    <Pressable
+                        style={[styles.option, config.rota === 'curta' && styles.activeOption]}
+                        onPress={() => onChange({...config, rota: 'curta'})}
+                        >
+                            <Text style={[styles.optionText, config.rota === 'curta' && styles.activeOptionText]}>
+                                Curta
+                    </Text>
+                </Pressable>
+            </View> 
+        </View>
+
+        <View style={[styles.card, { backgroundColor: colors.card}]}>
+            <Text style={[styles.label, { color: colors.text}]}>Raio Chegada</Text>
+            <Text style={[styles.description, { color: colors.textMuted}]}>
+                testo de teste
+            </Text>
+            <View style={[styles.radiusRow]}>
+                <Pressable style={styles.button} onPress={diminuirRaio}>
+                    <Text style={styles.buttonText}>-</Text>
+                </Pressable>
+                <Text style={[styles.value, {color: colors.text}]}>{config.aumentarRaio}</Text>
+                <Pressable style={styles.button} onPress={aumentarRaio}>
+                    <Text style={styles.buttonText}>+</Text>
+                </Pressable>    
+            </View>
+        </View>
+
+        <View style={[styles.card, { backgroundColor: colors.card}]}>
+            <View style={styles.row}>
+                <Text style={[styles.label, { color: colors.text }]}>Som e Narração</Text>
+                <Switch
+                    value={config.somLigado}
+                    onValueChange={(value) => onChange({...config, somLigado: value})} 
+                    />
+            </View>
+        </View>
+
+        <View style={[styles.card, { backgroundColor: colors.card}]}>
+            <View style={styles.row}>
+                <Text style={[styles.label, { color: colors.text }]}>Modo de Texto</Text>
+                <Switch
+                    value={config.modoTeste}
+                    onValueChange={(value) => onChange({...config, modoTeste: value})} 
+                    />
+            </View>
+            <Text style={[styles.description, { color: colors.textMuted}]}>
+                Teste 2
+            </Text>
+        </View>
+    </View>    
     );
 }
 
 const styles = StyleSheet.create({
-    safeArea: {
-        flex: 1,
-        backgroundColor: '#f8fbff',
-    },
-    container: {
-        flex: 1,
-        padding: 24,
-        gap: 20,
-    },
-    hero: {
-        alignItems: 'center',
-        gap: 10,
-        padding: 24,
-        borderRadius: 24,
-        backgroundColor: '#0f62fe',
-    },
-    logo: {
-        width: 120,
-        height: 120,
-        marginBottom: 4,
-    },
-    eyebrow: {
-        fontSize: 13,
-        fontWeight: '700',
-        letterSpacing: 1,
-        textTransform: 'uppercase',
-        color: '#d0e2ff',
-        textAlign: 'center',
-    },
-    title: {
-        fontSize: 32,
-        fontWeight: '800',
-        color: '#ffffff',
-        textAlign: 'center',
-    },
-    description: {
-        fontSize: 16,
-        lineHeight: 24,
-        color: '#edf5ff',
-        textAlign: 'center',
-    },
-    card: {
-        gap: 8,
-        padding: 20,
-        borderRadius: 20,
-        backgroundColor: '#ffffff',
-    },
-    cardTitle: {
-        fontSize: 18,
-        fontWeight: '700',
-        color: '#102542',
-    },
-    cardItem: {
-        fontSize: 15,
-        color: '#334e68',
-    },
+    screen: { flex: 1, padding: 20},
+    title: { fontSize: 28, fontWeight: 'bold', marginBottom: 16},
+    card: { borderRadius: 12, padding: 16, marginBottom: 12},
+    row: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'},
+    radiusRow: { flexDirection: 'row', marginTop: 12},
+    routeRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 12},
+    label: { fontSize: 16, fontWeight: '600'},
+    description: { fontSize: 13, marginTop: 4},
+    value: { fontSize: 20, fontWeight: 'bold', marginHorizontal: 20},
     button: {
-        paddingVertical: 16,
-        paddingHorizontal: 20,
-        borderRadius: 16,
+        width: 44,
+        height: 44,
+        borderRadius: 22,
+        backgroundColor: '#16a34a',
         alignItems: 'center',
-        backgroundColor: '#102542',
+        justifyContent: 'center',
     },
-    buttonText: {
-        fontSize: 16,
-        fontWeight: '700',
-        color: '#ffffff',
+    buttonText: { color: '#ffffff', fontSize: 24, fontWeight: 'bold' },
+    option: {
+        flex: 1,
+        paddingVertical: 10,
+        paddingHorizontal: 4,
+        borderRadius: 10,
+        borderWidth: 2,
+        borderColor: '#16a34a',
+        alignItems: 'center',
     },
+    activeOption: { backgroundColor: '#16a34a'},
+    optionText: { color: '#16a34a', fontWeight: '600'},
+    activeOptionText: { color: '#ffffff'},
 });
+
