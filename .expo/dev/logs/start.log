@@ -233,4 +233,3 @@
 {"_e":"metro:bundling:done","_t":1790615975595,"id":"8","total":1,"ms":40.3151}
 {"_e":"metro:bundling:started","_t":1790616055655,"id":"9","platform":"android","environment":null,"entry":"node_modules\\expo-router\\entry.js"}
 {"_e":"metro:bundling:progress","_t":1790616055656,"id":"9","progress":0,"total":1,"current":0}
-{"_e":"metro:bundling:done","_t":1790616055695,"id":"9","total":1,"ms":39.2703}
